@@ -1,25 +1,32 @@
-<form name="bedarfsanalyse">
-    <div class="form-group">
-    <label class="control-label col-md-4"
-           for="amount">Bezeichnung</label>
-    <div class="col-md-8">
-      <input cam-variable-type="String"
-             class="form-control"
-             type="text"
-             required />
-      
-      <p ng-show="invoiceForm.amount.$error.camVariableType">
-        Note: Input must be a 'Double'.
-      </p>
+<form role="form" name="requestForm"
+      class="form-horizontal">
 
-    </div>
-  </div>
+  <div class="form-group">
   
   <div class="form-group">
     <label class="control-label col-md-4"
-           for="amount">Betrag</label>
+           for="bezeichnung">Bezeichnung</label>
     <div class="col-md-8">
-      <input cam-variable-type="Double"
+      <input cam-variable-name="bezeichnung"
+             cam-variable-type="String"
+             id="bezeichnung"
+             class="form-control"
+             type="text"
+             required />
+      <div class="help">
+        (e.g. &quot;Camunda BPM &quot;)
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-4"
+           for="amount">Position</label>
+    <div class="col-md-8">
+      <input cam-variable-name="amount"
+             cam-variable-type="Double"
+             id="amount"
+             name="amount"
              class="form-control"
              type="text"
              required />
