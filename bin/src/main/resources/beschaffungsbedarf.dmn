@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="beschaffungsbedarf" name="Beschaffungsbedarf">
     <decisionTable id="decisionTable">
       <input id="input1" label="Betrag">
@@ -9,12 +9,10 @@
       <input id="InputClause_1lov6ey" label="Rahmenvertrag">
         <inputExpression id="LiteralExpression_0l2my0j" typeRef="string">        <text>type</text>
 </inputExpression>
-        <inputValues id="UnaryTests_0xlhyht">        <text><![CDATA["Ja","Nein"]]></text>
-</inputValues>
       </input>
       <output id="output1" label="Handlungsweise" name="result" typeRef="string" />
       <rule id="row-591670827-1">
-        <inputEntry id="UnaryTests_0qu4w90">        <text><![CDATA[> 500]]></text>
+        <inputEntry id="UnaryTests_0qu4w90">        <text><![CDATA[>500]]></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0zntpkd">        <text><![CDATA["Nein"]]></text>
 </inputEntry>
@@ -22,7 +20,7 @@
 </outputEntry>
       </rule>
       <rule id="row-591670827-2">
-        <inputEntry id="UnaryTests_14yfn0o">        <text><![CDATA[<= 500]]></text>
+        <inputEntry id="UnaryTests_14yfn0o">        <text><![CDATA[<=500]]></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0zdfrrl">        <text><![CDATA["Nein"]]></text>
 </inputEntry>

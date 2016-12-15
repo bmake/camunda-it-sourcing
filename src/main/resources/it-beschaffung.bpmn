@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.1.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.5.1">
   <bpmn:collaboration id="Collaboration_16lqfi6">
     <bpmn:participant id="it-beschaffen" name="Standard IT Beschaffung THB" processRef="it_beschaffung" />
     <bpmn:participant id="Participant_08ib8xu" name="Dienstleister" />
@@ -50,13 +50,13 @@
     <bpmn:sequenceFlow id="SequenceFlow_0mhezd5" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_0iptdsx" />
     <bpmn:sequenceFlow id="SequenceFlow_1fdfl15" sourceRef="BusinessRuleTask_0iptdsx" targetRef="ExclusiveGateway_0xwrdeg" />
     <bpmn:sequenceFlow id="SequenceFlow_1p89h73" name="Positionen bis&#10;500 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="Task_0v9dvqy">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${amount < 500}]]></bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Einfaches Angebot"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0ya5w4v" name="Positionen mit Rahmenvertrag" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="SendTask_0ltupz2">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${type.isJa()}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Rahmenvertrag"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € &#10;&#10;bis 20.000 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="Task_10pi28r">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${amount > 500 && amount <20000}]]></bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Komplexes Angebot"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1dsia28" name="Vergabeprozess erfolgreich?">
       <bpmn:incoming>SequenceFlow_1rfcs5i</bpmn:incoming>
