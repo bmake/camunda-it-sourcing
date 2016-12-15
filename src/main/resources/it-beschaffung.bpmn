@@ -32,7 +32,6 @@
         <bpmn:flowNodeRef>BusinessRuleTask_0iptdsx</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_028a72s</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>IntermediateCatchEvent_0oyre0s</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_1en8gmh</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_15q0ldj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_1jsm2om</bpmn:flowNodeRef>
       </bpmn:lane>
@@ -52,9 +51,6 @@
     <bpmn:sequenceFlow id="SequenceFlow_1fdfl15" sourceRef="BusinessRuleTask_0iptdsx" targetRef="ExclusiveGateway_0xwrdeg" />
     <bpmn:sequenceFlow id="SequenceFlow_1p89h73" name="Positionen bis&#10;500 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_15q0ldj">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Einfaches Angebot"}]]></bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0ya5w4v" name="Positionen mit Rahmenvertrag" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_1en8gmh">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Rahmenvertrag"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € &#10;&#10;bis 20.000 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_1jsm2om">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Komplexes Angebot"}]]></bpmn:conditionExpression>
@@ -95,7 +91,7 @@
     <bpmn:sendTask id="SendTask_0ltupz2" name="Artikel bestellen" camunda:class="org.camunda.bpm.getstarted.itbeschaffung.ArtikelBestellenDelegate">
       <bpmn:incoming>SequenceFlow_00de5uv</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0fcey64</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0s9vkpb</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0ya5w4v</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1iztipf</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:task id="Task_0xunv6h" name="Einfache Auftragsvergabe steuern">
@@ -131,11 +127,6 @@
       <bpmn:outgoing>SequenceFlow_0j89dvc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_136ljjt" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0s9vkpb" sourceRef="UserTask_1en8gmh" targetRef="SendTask_0ltupz2" />
-    <bpmn:userTask id="UserTask_1en8gmh" name="asd">
-      <bpmn:incoming>SequenceFlow_0ya5w4v</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0s9vkpb</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:userTask id="UserTask_15q0ldj" name="Einfaches Angebot einholen">
       <bpmn:incoming>SequenceFlow_1p89h73</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0v27c3k</bpmn:outgoing>
@@ -144,6 +135,9 @@
       <bpmn:incoming>SequenceFlow_02f5xev</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0e3zsqp</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0ya5w4v" name="Positionen mit Rahmenvertrag" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="SendTask_0ltupz2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Rahmenvertrag"}]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
   </bpmn:process>
   <bpmn:message id="Message_136ljjt" name="Message_0pui0sr" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -188,14 +182,6 @@
         <di:waypoint xsi:type="dc:Point" x="651" y="519" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="490" y="491.5" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0ya5w4v_di" bpmnElement="SequenceFlow_0ya5w4v">
-        <di:waypoint xsi:type="dc:Point" x="458" y="544" />
-        <di:waypoint xsi:type="dc:Point" x="458" y="641" />
-        <di:waypoint xsi:type="dc:Point" x="795" y="641" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="413" y="553.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_02f5xev_di" bpmnElement="SequenceFlow_02f5xev">
@@ -418,22 +404,20 @@
           <dc:Bounds x="1227" y="340.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0s9vkpb_di" bpmnElement="SequenceFlow_0s9vkpb">
-        <di:waypoint xsi:type="dc:Point" x="895" y="641" />
-        <di:waypoint xsi:type="dc:Point" x="1087" y="641" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="946.5" y="628.5" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_1en8gmh_di" bpmnElement="UserTask_1en8gmh">
-        <dc:Bounds x="794.7003205128206" y="601.1682692307693" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_15q0ldj_di" bpmnElement="UserTask_15q0ldj">
         <dc:Bounds x="651" y="479" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_1jsm2om_di" bpmnElement="UserTask_1jsm2om">
         <dc:Bounds x="542" y="366" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ya5w4v_di" bpmnElement="SequenceFlow_0ya5w4v">
+        <di:waypoint xsi:type="dc:Point" x="458" y="544" />
+        <di:waypoint xsi:type="dc:Point" x="458" y="641" />
+        <di:waypoint xsi:type="dc:Point" x="1087" y="641" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="413" y="553.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
