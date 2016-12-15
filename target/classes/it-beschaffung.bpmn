@@ -55,7 +55,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ya5w4v" name="Positionen mit Rahmenvertrag" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="SendTask_0ltupz2">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Rahmenvertrag"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € &#10;&#10;bis 20.000 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="Task_10pi28r">
+    <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € &#10;" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="Task_10pi28r">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Komplexes Angebot"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1dsia28" name="Vergabeprozess erfolgreich?">
@@ -197,7 +197,7 @@
         <di:waypoint xsi:type="dc:Point" x="458" y="406" />
         <di:waypoint xsi:type="dc:Point" x="542" y="406" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="449" y="363" width="90" height="20" />
+          <dc:Bounds x="453" y="363" width="81" height="25" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_08ib8xu_di" bpmnElement="Participant_08ib8xu">
