@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.5.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.1.1">
   <bpmn:collaboration id="Collaboration_16lqfi6">
     <bpmn:participant id="it-beschaffen" name="Standard IT Beschaffung THB" processRef="it_beschaffung" />
     <bpmn:participant id="Participant_08ib8xu" name="Dienstleister" />
     <bpmn:participant id="Participant_1h0vm06" name="Archiv" />
-    <bpmn:messageFlow id="MessageFlow_1gybbj5" sourceRef="Task_10pi28r" targetRef="Participant_08ib8xu" />
-    <bpmn:messageFlow id="MessageFlow_0acpsuh" sourceRef="Participant_08ib8xu" targetRef="Task_10pi28r" />
-    <bpmn:messageFlow id="MessageFlow_1hunsw1" sourceRef="Task_0v9dvqy" targetRef="Participant_08ib8xu" />
-    <bpmn:messageFlow id="MessageFlow_1xzvm6d" sourceRef="Participant_08ib8xu" targetRef="Task_0v9dvqy" />
+    <bpmn:messageFlow id="MessageFlow_1gybbj5" sourceRef="UserTask_1jsm2om" targetRef="Participant_08ib8xu" />
+    <bpmn:messageFlow id="MessageFlow_0acpsuh" sourceRef="Participant_08ib8xu" targetRef="UserTask_1jsm2om" />
+    <bpmn:messageFlow id="MessageFlow_1hunsw1" sourceRef="UserTask_15q0ldj" targetRef="Participant_08ib8xu" />
+    <bpmn:messageFlow id="MessageFlow_1xzvm6d" sourceRef="Participant_08ib8xu" targetRef="UserTask_15q0ldj" />
     <bpmn:messageFlow id="MessageFlow_0040zmg" sourceRef="EndEvent_0aecsde" targetRef="Participant_08ib8xu" />
     <bpmn:messageFlow id="MessageFlow_1cdixwb" sourceRef="SendTask_0ltupz2" targetRef="Participant_08ib8xu" />
     <bpmn:messageFlow id="MessageFlow_0wq15ox" sourceRef="Participant_08ib8xu" targetRef="IntermediateCatchEvent_0oyre0s" />
@@ -29,15 +29,16 @@
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0xwrdeg</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>SendTask_0ltupz2</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_10pi28r</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0v9dvqy</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>BusinessRuleTask_0iptdsx</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_028a72s</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>IntermediateCatchEvent_0oyre0s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_1en8gmh</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_15q0ldj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_1jsm2om</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="SequenceFlow_0v27c3k" sourceRef="Task_0v9dvqy" targetRef="Task_0xunv6h" />
-    <bpmn:sequenceFlow id="SequenceFlow_0e3zsqp" sourceRef="Task_10pi28r" targetRef="Task_1ntdq9y" />
+    <bpmn:sequenceFlow id="SequenceFlow_0v27c3k" sourceRef="UserTask_15q0ldj" targetRef="Task_0xunv6h" />
+    <bpmn:sequenceFlow id="SequenceFlow_0e3zsqp" sourceRef="UserTask_1jsm2om" targetRef="Task_1ntdq9y" />
     <bpmn:startEvent id="StartEvent_1" name="Bedarf besteht" camunda:formKey="embedded:app:forms/request.html">
       <bpmn:outgoing>SequenceFlow_0mhezd5</bpmn:outgoing>
     </bpmn:startEvent>
@@ -49,13 +50,13 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0mhezd5" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_0iptdsx" />
     <bpmn:sequenceFlow id="SequenceFlow_1fdfl15" sourceRef="BusinessRuleTask_0iptdsx" targetRef="ExclusiveGateway_0xwrdeg" />
-    <bpmn:sequenceFlow id="SequenceFlow_1p89h73" name="Positionen bis&#10;500 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="Task_0v9dvqy">
+    <bpmn:sequenceFlow id="SequenceFlow_1p89h73" name="Positionen bis&#10;500 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_15q0ldj">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Einfaches Angebot"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0ya5w4v" name="Positionen mit Rahmenvertrag" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="SendTask_0ltupz2">
+    <bpmn:sequenceFlow id="SequenceFlow_0ya5w4v" name="Positionen mit Rahmenvertrag" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_1en8gmh">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Rahmenvertrag"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € &#10;" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="Task_10pi28r">
+    <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € &#10;&#10;bis 20.000 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_1jsm2om">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Komplexes Angebot"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1dsia28" name="Vergabeprozess erfolgreich?">
@@ -92,19 +93,11 @@
     <bpmn:sequenceFlow id="SequenceFlow_07a10pw" sourceRef="UserTask_0kou43y" targetRef="UserTask_0pbsdg6" />
     <bpmn:sequenceFlow id="SequenceFlow_1ke1bg9" sourceRef="UserTask_0pbsdg6" targetRef="EndEvent_0gokr2z" />
     <bpmn:sendTask id="SendTask_0ltupz2" name="Artikel bestellen" camunda:class="org.camunda.bpm.getstarted.itbeschaffung.ArtikelBestellenDelegate">
-      <bpmn:incoming>SequenceFlow_0ya5w4v</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_00de5uv</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0fcey64</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0s9vkpb</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1iztipf</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:task id="Task_10pi28r" name="Komplexes Angebot einholen">
-      <bpmn:incoming>SequenceFlow_02f5xev</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0e3zsqp</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Task_0v9dvqy" name="Einfaches Angebot einholen">
-      <bpmn:incoming>SequenceFlow_1p89h73</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0v27c3k</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:task id="Task_0xunv6h" name="Einfache Auftragsvergabe steuern">
       <bpmn:incoming>SequenceFlow_0v27c3k</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1goto1f</bpmn:outgoing>
@@ -113,7 +106,7 @@
       <bpmn:incoming>SequenceFlow_0e3zsqp</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1rfcs5i</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:businessRuleTask id="BusinessRuleTask_0iptdsx" name="Bedarf analysieren" camunda:resultVariable="handlungsweise" camunda:decisionRef="beschaffungsbedarf" camunda:mapDecisionResult="collectEntries">
+    <bpmn:businessRuleTask id="BusinessRuleTask_0iptdsx" name="Bedarf analysieren" camunda:resultVariable="result" camunda:decisionRef="beschaffungsbedarf" camunda:mapDecisionResult="singleEntry">
       <bpmn:incoming>SequenceFlow_0mhezd5</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1fdfl15</bpmn:outgoing>
     </bpmn:businessRuleTask>
@@ -138,6 +131,19 @@
       <bpmn:outgoing>SequenceFlow_0j89dvc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_136ljjt" />
     </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0s9vkpb" sourceRef="UserTask_1en8gmh" targetRef="SendTask_0ltupz2" />
+    <bpmn:userTask id="UserTask_1en8gmh" name="asd">
+      <bpmn:incoming>SequenceFlow_0ya5w4v</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0s9vkpb</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="UserTask_15q0ldj" name="Einfaches Angebot einholen">
+      <bpmn:incoming>SequenceFlow_1p89h73</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0v27c3k</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="UserTask_1jsm2om" name="Komplexes Angebot einholen">
+      <bpmn:incoming>SequenceFlow_02f5xev</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0e3zsqp</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:message id="Message_136ljjt" name="Message_0pui0sr" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -187,7 +193,7 @@
       <bpmndi:BPMNEdge id="SequenceFlow_0ya5w4v_di" bpmnElement="SequenceFlow_0ya5w4v">
         <di:waypoint xsi:type="dc:Point" x="458" y="544" />
         <di:waypoint xsi:type="dc:Point" x="458" y="641" />
-        <di:waypoint xsi:type="dc:Point" x="1086" y="641" />
+        <di:waypoint xsi:type="dc:Point" x="795" y="641" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="413" y="553.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
@@ -197,7 +203,7 @@
         <di:waypoint xsi:type="dc:Point" x="458" y="406" />
         <di:waypoint xsi:type="dc:Point" x="542" y="406" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="453" y="363" width="81" height="25" />
+          <dc:Bounds x="449" y="363" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_08ib8xu_di" bpmnElement="Participant_08ib8xu">
@@ -391,12 +397,6 @@
       <bpmndi:BPMNShape id="UserTask_0pbsdg6_di" bpmnElement="UserTask_0pbsdg6">
         <dc:Bounds x="1468" y="156" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_10pi28r_di" bpmnElement="Task_10pi28r">
-        <dc:Bounds x="542" y="366" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_0v9dvqy_di" bpmnElement="Task_0v9dvqy">
-        <dc:Bounds x="651" y="479" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0xunv6h_di" bpmnElement="Task_0xunv6h">
         <dc:Bounds x="755" y="156" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -418,6 +418,22 @@
           <dc:Bounds x="1227" y="340.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0s9vkpb_di" bpmnElement="SequenceFlow_0s9vkpb">
+        <di:waypoint xsi:type="dc:Point" x="895" y="641" />
+        <di:waypoint xsi:type="dc:Point" x="1087" y="641" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="946.5" y="628.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1en8gmh_di" bpmnElement="UserTask_1en8gmh">
+        <dc:Bounds x="794.7003205128206" y="601.1682692307693" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_15q0ldj_di" bpmnElement="UserTask_15q0ldj">
+        <dc:Bounds x="651" y="479" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1jsm2om_di" bpmnElement="UserTask_1jsm2om">
+        <dc:Bounds x="542" y="366" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
