@@ -31,7 +31,7 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
       try {
           email.setFrom("noreply@camunda.org");
           email.setSubject("Artikel Bestellen");
-          email.setMsg("Sehr geehrte Frauen/Herren, \n\n Ich würde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Grüßen, \n\n Demo Demo");
+          email.setMsg("Sehr geehrte Frauen/Herren, \n\n Ich w&uuml;rde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Gr&uuml;ßen, \n\n Demo Demo");
 
           email.addTo(recipient);
 
