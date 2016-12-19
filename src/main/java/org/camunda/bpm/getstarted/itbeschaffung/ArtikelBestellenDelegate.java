@@ -20,9 +20,11 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
       String var = (String) execution.getVariable("bezeichnung");      
       String recipient = "happyhwx888@googlemail.com";
+      String etext = "Sehr geehrte Damen/Herren, \n\n Ich würde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Grüßen, \n\n Demo Demo";
+      String content = new String(etext.getBytes("ISO-8859-15"), "UTF-8");
       
       Email email = new SimpleEmail();
-      
+      email.setCharset("utf-8");
       email.setHostName(HOST);
       email.setSmtpPort(465);
       email.setAuthentication(USER, PWD);
@@ -31,7 +33,7 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
       try {
           email.setFrom("demodemo1234512345@gmail.com");
           email.setSubject("Artikel Bestellen");
-          email.setMsg("Sehr geehrte Frauen/Herren, \n\n Ich würde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Grüßen, \n\n Demo Demo");
+          email.setMsg(content);
 
           email.addTo(recipient);
 
