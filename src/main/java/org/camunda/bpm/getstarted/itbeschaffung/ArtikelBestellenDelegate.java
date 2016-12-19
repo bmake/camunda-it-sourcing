@@ -1,6 +1,5 @@
 package org.camunda.bpm.getstarted.itbeschaffung;
 
-import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,8 +20,6 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
       String var = (String) execution.getVariable("bezeichnung");      
       String recipient = "happyhwx888@googlemail.com";
-      String etext = "Sehr geehrte Frauen/Herren, \n\n Ich würde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Grüßen, \n\n Demo Demo";
-      Charset.forName("UTF-8").encode(etext);
       
       Email email = new SimpleEmail();
       email.setCharset("utf-8");
@@ -34,7 +31,7 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
       try {
           email.setFrom("noreply@camunda.org");
           email.setSubject("Artikel Bestellen");
-          email.setMsg(etext);
+          email.setMsg("Sehr geehrte Frauen/Herren, \n\n Ich w&uuml;rde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Gr&uuml;ßen, \n\n Demo Demo");
 
           email.addTo(recipient);
 
