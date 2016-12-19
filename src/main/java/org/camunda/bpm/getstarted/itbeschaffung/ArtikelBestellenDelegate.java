@@ -22,16 +22,16 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
       String recipient = "happyhwx888@googlemail.com";
       
       Email email = new SimpleEmail();
-      email.setCharset("utf-8");
+      
       email.setHostName(HOST);
       email.setSmtpPort(465);
       email.setAuthentication(USER, PWD);
       email.setSSL(true);
       
       try {
-          email.setFrom("noreply@camunda.org");
+          email.setFrom("demodemo1234512345@gmail.com");
           email.setSubject("Artikel Bestellen");
-          email.setMsg("Sehr geehrte Frauen/Herren, \n\n Ich w&uuml;rde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Gr&uuml;ßen, \n\n Demo Demo");
+          email.setMsg("Sehr geehrte Frauen/Herren, \n\n Ich würde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Grüßen, \n\n Demo Demo");
 
           email.addTo(recipient);
 
