@@ -19,8 +19,8 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
 
   public void execute(DelegateExecution execution) throws Exception {
       String var = (String) execution.getVariable("bezeichnung");      
-      String recipient = "happyhwx888@googlemail.com";
-      String etext = "Sehr geehrte Damen/Herren, \n\n Ich wuerde gerne den Artikel bestellen: " + var + ".\n\n Mit freundlichen Gruessen, \n\n Demo Demo";
+      String recipient = "rabinski@th-brandenburg.de";
+      String etext = "Sehr geehrte Damen und Herren, \n\n Ich wuerde gerne folgenden Artikel bestellen: " + var + ".\n\n Mit freundlichen Gruessen, \n\n Demo Demo";
       
       Email email = new SimpleEmail();
       email.setCharset("utf-8");
