@@ -8,20 +8,22 @@ import org.apache.commons.mail.SimpleEmail;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.runtime.Execution;
 
-public class ArtikelBestellenDelegate implements JavaDelegate {
+
+public class ITLiefern implements JavaDelegate {
 
   // TODO: Set Mail Server Properties
-  private static final String HOST = "smtp.gmail.com";
-  private static final String USER = "demodemo1234512345@gmail.com";
-  private static final String PWD = "google12345";
+	  private static final String HOST = "smtp.gmail.com";
+	  private static final String USER = "demodemo1234512345@gmail.com";
+	  private static final String PWD = "google12345";
 
-  private final static Logger LOGGER = Logger.getLogger(ArtikelBestellenDelegate.class.getName());
+  private final static Logger LOGGER = Logger.getLogger(ITLiefern.class.getName());
 
   public void execute(DelegateExecution execution) throws Exception {
-      String var = (String) execution.getVariable("bezeichnung");      
-      String recipient = "rabinski@th-brandenburg.de";
-      String etext = "Sehr geehrte Damen und Herren, \n\n Ich wuerde gerne folgenden Artikel bestellen: " + var + ".\n\n Mit freundlichen Gruessen, \n\n Demo Demo";
+      
+	  
+      String recipient = "demodemo1234512345@gmail.com";
       
       Email email = new SimpleEmail();
       email.setCharset("utf-8");
@@ -31,9 +33,9 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
       email.setSSL(true);
       
       try {
-          email.setFrom("noreplykunden@camunda.org");
-          email.setSubject("Artikel Bestellen");
-          email.setMsg(etext);
+          email.setFrom("noreplylieferant@camunda.org");
+          email.setSubject("Artikel Liefern");
+          email.setMsg("Sehr geehrte Damen/Herren, \n\n Hiermit sende ich Ihnen den Artikel.\n\n Mit freundlichen Grüßen, \n\n Lieferant");
 
           email.addTo(recipient);
 
@@ -44,10 +46,16 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
           LOGGER.log(Level.WARNING, "Could not send email to assignee", e);
         }
       
+
+      	
       RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-      runtimeService.correlateMessage("startMessage");
-      runtimeService.startProcessInstanceByMessage("startMessage");
       
+      	runtimeService.createMessageCorrelation("receiveMessage");
+      	Execution aa = runtimeService.createExecutionQuery().messageEventSubscriptionName("receiveMessage").singleResult();
+      	
+        runtimeService.messageEventReceived("receiveMessage", aa.getId());
+      	
+
     }
 
 }

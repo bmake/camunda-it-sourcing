@@ -11,6 +11,7 @@
     <bpmn:messageFlow id="MessageFlow_0040zmg" sourceRef="EndEvent_0aecsde" targetRef="Participant_08ib8xu" />
     <bpmn:messageFlow id="MessageFlow_1cdixwb" sourceRef="SendTask_0ltupz2" targetRef="Participant_08ib8xu" />
     <bpmn:messageFlow id="MessageFlow_1lx7jvz" sourceRef="Task_1ntdq9y" targetRef="Participant_1h0vm06" />
+    <bpmn:messageFlow id="MessageFlow_0bgz5l7" sourceRef="Participant_08ib8xu" targetRef="receiveMessage" />
   </bpmn:collaboration>
   <bpmn:process id="it_beschaffung" name="IT Beschaffung" isExecutable="true">
     <bpmn:laneSet>
@@ -32,6 +33,7 @@
         <bpmn:flowNodeRef>UserTask_028a72s</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_15q0ldj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_1jsm2om</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>receiveMessage</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="SequenceFlow_0v27c3k" sourceRef="UserTask_15q0ldj" targetRef="Task_0xunv6h" />
@@ -111,7 +113,7 @@
       <bpmn:outgoing>SequenceFlow_07a10pw</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="UserTask_028a72s" name="Lieferung prüfen" camunda:formKey="embedded:app:forms/check.html" camunda:assignee="peter">
-      <bpmn:incoming>SequenceFlow_1mbrvw1</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_16sy4re</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0zpb0we</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="UserTask_0pbsdg6" name="IT inventarisieren" camunda:assignee="mary">
@@ -134,9 +136,16 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ya5w4v" name="Positionen mit Rahmenvertrag" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="SendTask_0ltupz2">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Rahmenvertrag"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1mbrvw1" sourceRef="SendTask_0ltupz2" targetRef="UserTask_028a72s" />
+    <bpmn:sequenceFlow id="SequenceFlow_1mbrvw1" sourceRef="SendTask_0ltupz2" targetRef="receiveMessage" />
+    <bpmn:sequenceFlow id="SequenceFlow_16sy4re" sourceRef="receiveMessage" targetRef="UserTask_028a72s" />
+    <bpmn:intermediateCatchEvent id="receiveMessage" name="IT-Leistung erhalten">
+      <bpmn:incoming>SequenceFlow_1mbrvw1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_16sy4re</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_0c4io8j" />
+    </bpmn:intermediateCatchEvent>
   </bpmn:process>
   <bpmn:message id="Message_136ljjt" name="Message_0pui0sr" />
+  <bpmn:message id="Message_0c4io8j" name="receiveMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_16lqfi6">
       <bpmndi:BPMNShape id="Participant_096zfgi_di" bpmnElement="it-beschaffen">
@@ -390,9 +399,29 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1mbrvw1_di" bpmnElement="SequenceFlow_1mbrvw1">
         <di:waypoint xsi:type="dc:Point" x="1187" y="628" />
-        <di:waypoint xsi:type="dc:Point" x="1337" y="628" />
+        <di:waypoint xsi:type="dc:Point" x="1244" y="628" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1217" y="618" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_16sy4re_di" bpmnElement="SequenceFlow_16sy4re">
+        <di:waypoint xsi:type="dc:Point" x="1280" y="628" />
+        <di:waypoint xsi:type="dc:Point" x="1337" y="628" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1263.5" y="618" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0yqww28_di" bpmnElement="receiveMessage">
+        <dc:Bounds x="1244.2592592592594" y="610" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1217.2592592592594" y="646" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_0bgz5l7_di" bpmnElement="MessageFlow_0bgz5l7">
+        <di:waypoint xsi:type="dc:Point" x="1262" y="761" />
+        <di:waypoint xsi:type="dc:Point" x="1262" y="646" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1094" y="694" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
