@@ -11,14 +11,6 @@
 </inputExpression>
       </input>
       <output id="output1" label="Handlungsweise" name="result" typeRef="string" />
-      <rule id="row-591670827-3">
-        <inputEntry id="UnaryTests_1w54yco">        <text><![CDATA["Ja"]]></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0aiwaxw">        <text></text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_1kdakvp">        <text><![CDATA["Rahmenvertrag"]]></text>
-</outputEntry>
-      </rule>
       <rule id="row-591670827-1">
         <inputEntry id="UnaryTests_0zntpkd">        <text><![CDATA["Nein"]]></text>
 </inputEntry>
@@ -33,6 +25,14 @@
         <inputEntry id="UnaryTests_14yfn0o">        <text><![CDATA[<=500]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0rkbaz1">        <text><![CDATA["Einfaches Angebot"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-244082385-1">
+        <inputEntry id="UnaryTests_1csdme9">        <text><![CDATA["Ja"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1v8k83k">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0x89pph">        <text><![CDATA["Rahmenvertrag"]]></text>
 </outputEntry>
       </rule>
     </decisionTable>

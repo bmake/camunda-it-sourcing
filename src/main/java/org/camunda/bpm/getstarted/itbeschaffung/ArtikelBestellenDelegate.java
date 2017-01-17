@@ -19,10 +19,22 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
   private final static Logger LOGGER = Logger.getLogger(ArtikelBestellenDelegate.class.getName());
 
   public void execute(DelegateExecution execution) throws Exception {
-      String var = (String) execution.getVariable("bezeichnung");      
-      String recipient = "rabinski@th-brandenburg.de";
+      String var = (String) execution.getVariable("bezeichnung");  
+      String lieferanten = (String) execution.getVariable("lieferant");
+      String emailadress = null;
+      if (lieferanten.equals("Lieferant A")) {
+    		emailadress = "rabinski@th-brandenburg.de";
+    	}
+      else if (lieferanten.equals("Lieferant B")) {
+  		emailadress = "schillic@th-brandenburg.de";
+  	    }
+      else if (lieferanten.equals("Lieferant C")) {
+  		emailadress = "hu@th-brandenburg.de";
+     	}
+      String recipient = emailadress ;
       String etext = "Sehr geehrte Damen und Herren, \n\n Ich wuerde gerne folgenden Artikel bestellen: " + var + ".\n\n Mit freundlichen Gruessen, \n\n Demo Demo";
       
+      if (emailadress != null){
       Email email = new SimpleEmail();
       email.setCharset("utf-8");
       email.setHostName(HOST);
@@ -47,7 +59,7 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
       RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
       runtimeService.correlateMessage("startMessage");
       runtimeService.startProcessInstanceByMessage("startMessage");
-      
+      } 
     }
 
 }

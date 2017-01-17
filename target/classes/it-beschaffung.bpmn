@@ -52,7 +52,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1p89h73" name="Positionen bis&#10;500 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_15q0ldj">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Einfaches Angebot"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € &#10;&#10;bis 20.000 €" sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_1jsm2om">
+    <bpmn:sequenceFlow id="SequenceFlow_02f5xev" name="Positionen über 500 € " sourceRef="ExclusiveGateway_0xwrdeg" targetRef="UserTask_1jsm2om">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${result == "Komplexes Angebot"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1dsia28" name="Vergabeprozess erfolgreich?">
@@ -116,12 +116,7 @@
       <bpmn:incoming>SequenceFlow_16sy4re</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0zpb0we</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="UserTask_0pbsdg6" name="IT inventarisieren" camunda:assignee="mary">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="FormField_2pq0s8q" label="Inventarisieren Sie den Bestand." type="boolean" />
-        </camunda:formData>
-      </bpmn:extensionElements>
+    <bpmn:userTask id="UserTask_0pbsdg6" name="IT inventarisieren" camunda:formKey="embedded:app:forms/inventarisieren.html" camunda:assignee="mary">
       <bpmn:incoming>SequenceFlow_07a10pw</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ke1bg9</bpmn:outgoing>
     </bpmn:userTask>

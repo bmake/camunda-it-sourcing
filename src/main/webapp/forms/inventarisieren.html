@@ -1,0 +1,83 @@
+<form class="form-horizontal"
+      role="form">
+
+  <p>inventarisieren Sie den Bestand</p>
+  
+  <div class="form-group">
+    <label class="control-label col-md-2">Bezeichnung</label>
+    <div class="col-md-10">
+      <input cam-variable-name="bezeichnung"
+             type="text"
+             name="bezeichnung"
+             readonly="true"
+             class="form-control" />
+    </div>
+  </div>
+  
+    <div class="form-group">
+    <label class="control-label col-md-2">Betrag</label>
+    <div class="col-md-10">
+      <input cam-variable-name="amount"
+             type="text"
+             name="amount"
+             readonly="true"
+             class="form-control" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-md-4"
+           for="bezeichnung">Inventarisierungsnummer</label>
+    <div class="col-md-8">
+      <input cam-variable-name="inventarisierung"
+             cam-variable-type="String"
+             id="inventarisierung"
+             class="form-control"
+             type="text"
+             required />
+      <div class="help">
+        (e.g. &quot;Software-12345 &quot;)
+      </div>
+    </div>
+  </div>
+  
+    <div class="form-group">
+    <label class="control-label col-md-4"
+           for="bezeichnung">Besteller</label>
+    <div class="col-md-8">
+      <input cam-variable-name="besteller"
+             cam-variable-type="String"
+             id="besteller"
+             class="form-control"
+             type="text"
+             required />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-md-4"
+           for="bezeichnung">Abteilung</label>
+    <div class="col-md-8">
+      <input cam-variable-name="abteilung"
+             cam-variable-type="String"
+             id="abteilung"
+             class="form-control"
+             type="text"
+             required />
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-md-4"
+           for="bezeichnung">Raum</label>
+    <div class="col-md-8">
+      <input cam-variable-name="raum"
+             cam-variable-type="String"
+             id="raum"
+             class="form-control"
+             type="text"
+             required />
+    </div>
+  </div>
+  
+</form>
