@@ -22,13 +22,13 @@ public class ArtikelBestellenDelegate implements JavaDelegate {
       String var = (String) execution.getVariable("bezeichnung");  
       String lieferanten = (String) execution.getVariable("lieferant");
       String emailadress = null;
-      if (lieferanten.equals("Lieferant A")) {
+      if (lieferanten.equals("Rahmenvertrag A")) {
     		emailadress = "rabinski@th-brandenburg.de";
     	}
-      else if (lieferanten.equals("Lieferant B")) {
+      else if (lieferanten.equals("Rahmenvertrag B")) {
   		emailadress = "schillic@th-brandenburg.de";
   	    }
-      else if (lieferanten.equals("Lieferant C")) {
+      else if (lieferanten.equals("Rahmenvertrag C")) {
   		emailadress = "hu@th-brandenburg.de";
      	}
       String recipient = emailadress ;
